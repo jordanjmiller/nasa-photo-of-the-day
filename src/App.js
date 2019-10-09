@@ -1,7 +1,16 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
 import "./App.css";
+import "./css/index.css";
 
+// components
+import Buttons from './components/buttons/buttons.js';
+import Description from './components/description/description.js';
+import Image from './components/image/image.js';
+import Title from './components/title/title.js';
+
+
+//personal api key: https://api.nasa.gov/planetary/apod?api_key=39fVSI5GWG0ExzLP4WgQBSsTbpPZhZuwQ8dMPe0B
 // https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY
 // https://api.nasa.gov/#apod
 // getFullYear()	Get the year as a four digit number (yyyy)
@@ -32,7 +41,16 @@ function App() {
   // const [date, setDate] = useState('');
   useEffect(() => {
     axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
-    .then(response => {console.log(response.data)})
+    .then(response => {
+    console.log(response.data);
+    
+    setTitle(response.data.title);
+    setExplanation(response.data.explanation);
+    setMedia_type(response.data.media_type);
+    setHdurl(response.data.hdurl);
+    setUrl(response.data.url);
+    
+    })
     .catch(error => {console.log('Error! : ' + error)})
   }, []);
 
@@ -41,14 +59,21 @@ function App() {
   // .catch(error => {console.log('Error! : ' + error)});
 
   return (
-    <div className="App">
+    // <div className="App"> 
+    <div className ="appContainer">
       <p>
         Read through the instructions in the README.md file to build your NASA
         app! Have fun 🚀!
       </p>
-      <button onClick={() => {console.log('click')}}>clicker</button>
+      <Image media_type={media_type} useHD={useHD} url={url} hdurl ={hdurl}/>
+      <Title title={title}/>
+      <Description explanation={explanation}/>
+      {/* <Buttons /> */}
+      <button onClick={() => {console.log('click')}}>Toggle HD Image: {useHD}</button>
     </div>
   );
 }
 
 export default App;
+// need toggle HD button
+// need to check for and display video
