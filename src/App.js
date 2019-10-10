@@ -4,8 +4,9 @@ import "./App.css";
 import "./css/index.css";
 
 // components
-import Buttons from './components/buttons/buttons.js';
+import ButtonsAndTitle from './components/buttons/buttons.js';
 import Description from './components/description/description.js';
+import Header from './components/header/header.js';
 import Image from './components/image/image.js';
 import Title from './components/title/title.js';
 
@@ -30,6 +31,7 @@ function App() {
   const today = new Date();
   console.log(`${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`);
   console.log(today);
+  const [displayedDate, setDisplayedDate] = useState(new Date());
 
   const [date, setDate] = useState('');
   const [title, setTitle] = useState('');
@@ -40,7 +42,7 @@ function App() {
   const [media_type, setMedia_type] = useState('');
   // const [date, setDate] = useState('');
   useEffect(() => {
-    axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
+    axios.get(`https://api.nasa.gov/planetary/apod?api_key=39fVSI5GWG0ExzLP4WgQBSsTbpPZhZuwQ8dMPe0B&date=${displayedDate.getFullYear()}-${displayedDate.getMonth()+1}-${displayedDate.getDate()}`)
     .then(response => {
     console.log(response.data);
     
@@ -52,7 +54,7 @@ function App() {
     
     })
     .catch(error => {console.log('Error! : ' + error)})
-  }, []);
+  }, [displayedDate]);
 
   // axios.get('https://api.github.com/users/jordanjmiller')
   // .then(response => {console.log(response.data)})
@@ -60,20 +62,19 @@ function App() {
 
   return (
     // <div className="App"> 
+    <>
+    <Header displayedDate={displayedDate}/>
     <div className ="appContainer">
-      <p>
-        Read through the instructions in the README.md file to build your NASA
-        app! Have fun 🚀!
-      </p>
+      <ButtonsAndTitle title={title} today={today} displayedDate={displayedDate} setDisplayedDate={setDisplayedDate} />
       <Image media_type={media_type} useHD={useHD} url={url} hdurl ={hdurl}/>
-      <Title title={title}/>
       <Description explanation={explanation}/>
-      {/* <Buttons /> */}
       <button onClick={() => {console.log('click')}}>Toggle HD Image: {useHD}</button>
     </div>
+    </>
   );
 }
 
 export default App;
 // need toggle HD button
 // need to check for and display video
+//need to add a today button
