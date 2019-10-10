@@ -78,3 +78,4 @@ export default App;
 // need toggle HD button
 // need to check for and display video
 //need to add a today button
+//also add today button to header logo
