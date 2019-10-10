@@ -56,7 +56,7 @@ const Header = (props) => {
           <>
           <div>
           <img src={logo} alt='Nasa Logo'/>
-          <h1>Photo of the Day<br></br>{`${props.displayedDate.getFullYear()}-${props.displayedDate.getMonth()+1}-${props.displayedDate.getDate()}`}</h1>
+          <h1>Astronomy<br></br>Photo of the Day<br></br>{`${props.displayedDate.getFullYear()}-${props.displayedDate.getMonth()+1}-${props.displayedDate.getDate()}`}</h1>
           </div>
           <div className='hButtonDiv'>
           <Button type='headerB' onClick={ () => {
