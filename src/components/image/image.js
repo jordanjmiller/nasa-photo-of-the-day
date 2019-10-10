@@ -10,7 +10,18 @@ const Image = (props) => {
         ?   props.useHD
             ? <img src={props.hdurl} />
             : <img src={props.url} />
-        :   <p>It's a video oh no</p>
+        : <iframe
+            style={{
+              // position: "absolute",
+              // top: 0,
+              // left: 0,
+              width: "100%",
+              height: "500px"
+            }}
+            src={props.url}
+            frameBorder="0"
+          />
+        // :   <p>It's a video oh no</p>
       }
     </div>
   );

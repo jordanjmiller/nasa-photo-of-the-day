@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
 import "./App.css";
+import styled from 'styled-components';
 import "./css/index.css";
 
 // components
@@ -48,13 +49,13 @@ function App() {
     
     setTitle(response.data.title);
     setExplanation(response.data.explanation);
-    setMedia_type(response.data.media_type);
     setHdurl(response.data.hdurl);
     setUrl(response.data.url);
+    setMedia_type(response.data.media_type);
     
     })
     .catch(error => {console.log('Error! : ' + error)})
-  }, [displayedDate]);
+  }, [displayedDate, useHD]);
 
   // axios.get('https://api.github.com/users/jordanjmiller')
   // .then(response => {console.log(response.data)})
@@ -63,12 +64,11 @@ function App() {
   return (
     // <div className="App"> 
     <>
-    <Header displayedDate={displayedDate}/>
+    <Header today={today} displayedDate={displayedDate} setDisplayedDate={setDisplayedDate} useHD={useHD} setUseHD={setUseHD}/>
     <div className ="appContainer">
       <ButtonsAndTitle title={title} today={today} displayedDate={displayedDate} setDisplayedDate={setDisplayedDate} />
       <Image media_type={media_type} useHD={useHD} url={url} hdurl ={hdurl}/>
       <Description explanation={explanation}/>
-      <button onClick={() => {console.log('click')}}>Toggle HD Image: {useHD}</button>
     </div>
     </>
   );
